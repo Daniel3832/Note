@@ -1,1 +1,21 @@
+class Solution:
+    def findMaximizedCapital(self, k, W, Profits, Capital):
+        """
+        :type k: int
+        :type W: int
+        :type Profits: List[int]
+        :type Capital: List[int]
+        :rtype: int
+        """
+        heap = []
+        cap = sorted(zip(Profits, Capital), key = lambda pair: pair[1])        #####
+        i = 0
+        for _ in range(k):
+            while i < len(cap) and W >= cap[i][1]:                              ### check i < len(cap) first
+                heapq.heappush(heap, -cap[i][0])
+                i += 1
+            if heap:
+                W -= heapq.heappop(heap)
+        return W
+            
 
